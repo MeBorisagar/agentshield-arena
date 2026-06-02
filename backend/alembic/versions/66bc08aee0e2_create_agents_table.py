@@ -1,8 +1,8 @@
 """create agents table
 
-Revision ID: 1b50a4c69c30
+Revision ID: 66bc08aee0e2
 Revises: 
-Create Date: 2026-06-02 12:56:27.330018
+Create Date: 2026-06-02 15:25:39.118237
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '1b50a4c69c30'
+revision: str = '66bc08aee0e2'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('agent_type', sa.String(length=100), nullable=False),
     sa.Column('endpoint', sa.String(length=500), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
