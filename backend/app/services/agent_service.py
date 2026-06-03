@@ -19,9 +19,26 @@ class AgentService:
         )
 
         db.add(agent)
-
         db.commit()
-
         db.refresh(agent)
 
         return agent
+
+    @staticmethod
+    def get_all(
+        db: Session,
+    ) -> list[Agent]:
+
+        return db.query(Agent).all()
+
+    @staticmethod
+    def get_by_id(
+        db: Session,
+        agent_id: int,
+    ) -> Agent | None:
+
+        return (
+            db.query(Agent)
+            .filter(Agent.id == agent_id)
+            .first()
+        )
